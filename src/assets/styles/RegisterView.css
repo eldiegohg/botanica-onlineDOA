@@ -1,0 +1,60 @@
+.registerView-root {
+    height: 100vh;
+  }
+  
+  .registerView-paper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .registerView-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .registerView-form {
+    width: 100%; /* Fix IE 11 issue. */
+    margin-top: 8px;
+  }
+  
+  .registerView-textField {
+    margin-bottom: 16px;
+  }
+  
+  .registerView-submit {
+    margin: 16px 0px;
+    background-color: #8BC34A;
+  }
+  
+  .registerView-submit:hover {
+    background-color: #7CB342;
+  }
+  
+  .registerView a {
+    color: #388E3C;
+  }
+  
+  .registerView a:hover {
+    text-decoration: underline;
+  }
+  
+  .registerView-image {
+    background: url('../img/registro.png') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .registerView-infoBox {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
