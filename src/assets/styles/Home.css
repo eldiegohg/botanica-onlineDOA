@@ -1,0 +1,54 @@
+/* Home.css */
+.slider-item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Puedes ajustar la altura según tus necesidades */
+    background: url('../img/slider.png') no-repeat center center; /* Asegúrate de tener una imagen en esta ruta */
+    background-size: cover;
+  }
+  
+  .slider-content {
+    background-color: rgba(255, 255, 0, 0.6); /* Fondo amarillo translúcido */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .slider-title {
+    font-weight: bold;
+    color: #000000; /* Color negro */
+  }
+  
+  .slider-subtitle {
+    margin-top: 10px;
+    color: #000000; /* Color negro */
+  }
+  
+  .slider-note {
+    margin-top: 5px;
+    color: #000000; /* Color negro */
+    font-size: 0.8em;
+  }
+  
+  .slick-prev, .slick-next {
+    z-index: 1;
+    color: #000000; /* Color negro */
+  }
+  
+  .homeSections-container {
+    margin-top: 40px;
+  }
+  
+  .homeSections-section {
+    margin-bottom: 40px;
+  }
+  
+  .homeSections-card {
+    transition: transform 0.3s ease;
+  }
+  
+  .homeSections-card:hover {
+    transform: translateY(-5px);
+  }

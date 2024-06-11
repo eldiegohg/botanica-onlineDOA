@@ -1,0 +1,43 @@
+.loginView-container {
+  background: url('../img/inicioSesion.png') no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.loginView-paper {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loginView-form {
+  width: 100%; /* Fix IE 11 issue. */
+  margin-top: 8px;
+}
+
+.loginView-textField {
+  margin-bottom: 16px;
+}
+
+.loginView-submit {
+  margin: 8px 0px;
+  background-color: #8BC34A;
+}
+
+.loginView-submit:hover {
+  background-color: #7CB342;
+}
+
+.loginView a {
+  color: #388E3C;
+}
+
+.loginView a:hover {
+  text-decoration: underline;
+}
