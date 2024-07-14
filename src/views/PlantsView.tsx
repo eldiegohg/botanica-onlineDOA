@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Container, Grid, Card, CardMedia, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { fetchPlants, Plant } from '../services/apiService';
 import axios from 'axios';
+import { useCart } from '../context/CartContext';
 
 const UNSPLASH_API_URL = 'https://api.unsplash.com/search/photos';
-const UNSPLASH_ACCESS_KEY = 'X6_j0qdvnIfr365Duh2mXuetHs9s1vXNrP0v4g5KCU0'; 
+const UNSPLASH_ACCESS_KEY = 'X6_j0qdvnIfr365Duh2mXuetHs9s1vXNrP0v4g5KCU0';
 
 interface PlantWithImage extends Plant {
   imageUrl?: string;
@@ -12,6 +13,7 @@ interface PlantWithImage extends Plant {
 
 const PlantsView: React.FC = () => {
   const [plants, setPlants] = useState<PlantWithImage[]>([]);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     fetchPlantsData();
@@ -44,6 +46,16 @@ const PlantsView: React.FC = () => {
     return undefined;
   };
 
+  const handleAddToCart = (plant: PlantWithImage) => {
+    addToCart({
+      id: plant.pkPlanta,
+      name: plant.nombre,
+      price: plant.precio,
+      quantity: 1,
+      imageUrl: plant.imageUrl, // Agregar URL de imagen
+    });
+  };
+
   return (
     <Container className="plantsView-container">
       <Typography variant="h4" gutterBottom>Plantas Disponibles</Typography>
@@ -67,7 +79,7 @@ const PlantsView: React.FC = () => {
                 <Typography variant="body2" color="textSecondary"><strong>Precio:</strong> ${plant.precio}</Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" color="primary">Agregar al carrito</Button>
+                <Button size="small" color="primary" onClick={() => handleAddToCart(plant)}>Agregar al carrito</Button>
               </CardActions>
             </Card>
           </Grid>

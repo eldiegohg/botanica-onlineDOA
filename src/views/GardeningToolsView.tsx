@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Grid, Card, CardMedia, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { fetchTools, Tool } from '../services/apiService';
 import axios from 'axios';
+import { useCart } from '../context/CartContext';
 
 const UNSPLASH_API_URL = 'https://api.unsplash.com/search/photos';
 const UNSPLASH_ACCESS_KEY = 'X6_j0qdvnIfr365Duh2mXuetHs9s1vXNrP0v4g5KCU0';
@@ -12,6 +13,7 @@ interface ToolWithImage extends Tool {
 
 const GardeningToolsView: React.FC = () => {
   const [tools, setTools] = useState<ToolWithImage[]>([]);
+  const { addToCart } = useCart(); // Use the cart context
 
   useEffect(() => {
     fetchToolsData();
@@ -44,6 +46,16 @@ const GardeningToolsView: React.FC = () => {
     return undefined;
   };
 
+  const handleAddToCart = (tool: ToolWithImage) => {
+    addToCart({
+      id: tool.pkHerramienta,
+      name: tool.nombre,
+      price: tool.precio,
+      quantity: 1,
+      imageUrl: tool.imageUrl, // Add imageUrl to the cart item
+    });
+  };
+
   return (
     <Container className="toolsView-container">
       <Typography variant="h4" gutterBottom>Herramientas de Jardinería Disponibles</Typography>
@@ -68,7 +80,7 @@ const GardeningToolsView: React.FC = () => {
                 <Typography variant="body2" color="textSecondary"><strong>Precio:</strong> ${tool.precio}</Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" color="primary">Agregar al carrito</Button>
+                <Button size="small" color="primary" onClick={() => handleAddToCart(tool)}>Agregar al carrito</Button>
               </CardActions>
             </Card>
           </Grid>

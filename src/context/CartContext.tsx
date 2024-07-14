@@ -1,51 +1,86 @@
-import React, { createContext, useState, ReactNode } from 'react';
+// src/context/CartContext.tsx
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 interface CartItem {
-  id: string;
+  id: number;
   name: string;
   price: number;
   quantity: number;
+  imageUrl?: string; // Agregar campo de imagen
 }
 
-interface CartContextProps {
-  cartItems: CartItem[];
+interface CartContextType {
+  cart: CartItem[];
   addToCart: (item: CartItem) => void;
-  removeFromCart: (id: string) => void;
+  removeFromCart: (id: number) => void;
+  clearCart: () => void;
+  decreaseQuantity: (id: number) => void;
+  increaseQuantity: (id: number) => void; // Nueva función
 }
 
-interface CartProviderProps {
-  children: ReactNode;
-}
+const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const CartContext = createContext<CartContextProps>({
-  cartItems: [],
-  addToCart: () => {},
-  removeFromCart: () => {},
-});
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
+};
 
-export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   const addToCart = (item: CartItem) => {
-    setCartItems((prevItems) => {
-      const itemExists = prevItems.find((cartItem) => cartItem.id === item.id);
-      if (itemExists) {
-        return prevItems.map((cartItem) =>
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
+      if (existingItem) {
+        return prevCart.map((cartItem) =>
           cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem
         );
+      } else {
+        return [...prevCart, { ...item, quantity: 1 }];
       }
-      return [...prevItems, item];
     });
   };
 
-  const removeFromCart = (id: string) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  const removeFromCart = (id: number) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  };
+
+  const decreaseQuantity = (id: number) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((cartItem) => cartItem.id === id);
+      if (existingItem && existingItem.quantity > 1) {
+        return prevCart.map((cartItem) =>
+          cartItem.id === id
+            ? { ...cartItem, quantity: cartItem.quantity - 1 }
+            : cartItem
+        );
+      } else {
+        return prevCart.filter((cartItem) => cartItem.id !== id);
+      }
+    });
+  };
+
+  const increaseQuantity = (id: number) => {
+    setCart((prevCart) =>
+      prevCart.map((cartItem) =>
+        cartItem.id === id
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      )
+    );
+  };
+
+  const clearCart = () => {
+    setCart([]);
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, decreaseQuantity, increaseQuantity }}>
       {children}
     </CartContext.Provider>
   );
