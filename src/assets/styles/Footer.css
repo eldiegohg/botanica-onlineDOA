@@ -1,0 +1,14 @@
+/* Footer.css */
+.footer {
+    background-color: #FFFB8F;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    /* Ensures padding is included in the total width */
+    overflow-x: hidden;
+    /* Prevents horizontal overflow */
+}
+
+.footer-text {
+    color: black;
+}
