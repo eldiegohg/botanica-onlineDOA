@@ -1,59 +1,72 @@
-import React, { useContext } from 'react';
-import { Container, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { CartContext } from '../context/CartContext';
-import '../assets/styles/CartView.css';
+// src/views/CartView.tsx
+import React from 'react';
+import { Container, Grid, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
+import { useCart } from '../context/CartContext';
+import { PayPalButtons, PayPalButtonsComponentProps } from "@paypal/react-paypal-js";
 
 const CartView: React.FC = () => {
-  const { cartItems, removeFromCart } = useContext(CartContext);
+  const { cart, removeFromCart, decreaseQuantity, clearCart, increaseQuantity } = useCart();
 
-  const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+
+  const createOrder: PayPalButtonsComponentProps['createOrder'] = (data, actions) => {
+    if (!actions.order) return Promise.reject();
+    return actions.order.create({
+      purchase_units: [{
+        amount: {
+          currency_code: "USD",
+          value: totalPrice,
+        },
+      }],
+      intent: 'CAPTURE'
+    });
+  };
+
+  const onApprove: PayPalButtonsComponentProps['onApprove'] = (data, actions) => {
+    if (!actions.order) return Promise.reject();
+    return actions.order.capture().then((details) => {
+      const payerName = details.payer?.name?.given_name;
+      alert(`Transaction completed by ${payerName}`);
+      clearCart();
+    });
   };
 
   return (
-    <Container className="cartView-container">
-      <Typography variant="h5" gutterBottom>Carrito de Compras</Typography>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Producto</TableCell>
-              <TableCell>Precio</TableCell>
-              <TableCell>Cantidad</TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {cartItems.map((item, index) => (
-              <TableRow key={index}>
-                <TableCell>{item.id}</TableCell>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>${item.price.toFixed(2)}</TableCell>
-                <TableCell>{item.quantity}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => removeFromCart(item.id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Box className="cartView-summary">
-        <Typography variant="h6">Resumen del pedido</Typography>
-        <Typography>Subtotal: ${calculateTotal().toFixed(2)}</Typography>
-        <Typography>IVA (16%): ${(calculateTotal() * 0.16).toFixed(2)}</Typography>
-        <Typography>Descuentos: $0.00</Typography>
-        <Typography>Total: ${(calculateTotal() * 1.16).toFixed(2)}</Typography>
-        <Button variant="contained" color="primary" className="cartView-checkoutButton">
-          Pagar ahora ({cartItems.length})
-        </Button>
-        <Typography>Aceptamos:</Typography>
-        <img src="path-to-payment-icons.png" alt="Métodos de pago" />
-      </Box>
+    <Container>
+      <Typography variant="h4" gutterBottom>Carrito de Compras</Typography>
+      <Typography variant="h6" gutterBottom>Total de productos: {totalQuantity}</Typography>
+      <Typography variant="h6" gutterBottom>Precio Total: ${totalPrice}</Typography>
+      <Grid container spacing={4}>
+        {cart.map((item) => (
+          <Grid item xs={12} sm={6} md={3} key={item.id}>
+            <Card>
+              {item.imageUrl && (
+                <CardMedia
+                  component="img"
+                  alt={item.name}
+                  height="140"
+                  image={item.imageUrl}
+                />
+              )}
+              <CardContent>
+                <Typography variant="h6">{item.name}</Typography>
+                <Typography variant="body2" color="textSecondary"><strong>Precio:</strong> ${item.price}</Typography>
+                <Typography variant="body2" color="textSecondary"><strong>Cantidad:</strong> {item.quantity}</Typography>
+                <Button variant="contained" color="primary" onClick={() => decreaseQuantity(item.id)}>Disminuir Cantidad</Button>
+                <Button variant="contained" color="primary" onClick={() => increaseQuantity(item.id)}>Aumentar Cantidad</Button>
+                <Button variant="contained" color="secondary" onClick={() => removeFromCart(item.id)}>Eliminar</Button>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+      <div style={{ marginTop: '20px' }}>
+        <PayPalButtons 
+          createOrder={createOrder} 
+          onApprove={onApprove} 
+        />
+      </div>
     </Container>
   );
 };

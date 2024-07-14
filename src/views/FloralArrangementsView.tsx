@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Grid, Card, CardMedia, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { fetchFloralArrangements, FloralArrangement } from '../services/apiService';
 import axios from 'axios';
+import { useCart } from '../context/CartContext';
 
 const UNSPLASH_API_URL = 'https://api.unsplash.com/search/photos';
 const UNSPLASH_ACCESS_KEY = 'X6_j0qdvnIfr365Duh2mXuetHs9s1vXNrP0v4g5KCU0';
@@ -12,6 +13,7 @@ interface FloralArrangementWithImage extends FloralArrangement {
 
 const FloralArrangementsView: React.FC = () => {
   const [floralArrangements, setFloralArrangements] = useState<FloralArrangementWithImage[]>([]);
+  const { addToCart } = useCart(); // Use the cart context
 
   useEffect(() => {
     fetchFloralArrangementsData();
@@ -44,6 +46,16 @@ const FloralArrangementsView: React.FC = () => {
     return undefined;
   };
 
+  const handleAddToCart = (floral: FloralArrangementWithImage) => {
+    addToCart({
+      id: floral.pkArreglo,
+      name: floral.nombre,
+      price: floral.precio,
+      quantity: 1,
+      imageUrl: floral.imageUrl, // Add imageUrl to the cart item
+    });
+  };
+
   return (
     <Container className="floralArrangementsView-container">
       <Typography variant="h4" gutterBottom>Arreglos Florales Disponibles</Typography>
@@ -67,7 +79,7 @@ const FloralArrangementsView: React.FC = () => {
                 <Typography variant="body2" color="textSecondary"><strong>Precio:</strong> ${floral.precio}</Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" color="primary">Agregar al carrito</Button>
+                <Button size="small" color="primary" onClick={() => handleAddToCart(floral)}>Agregar al carrito</Button>
               </CardActions>
             </Card>
           </Grid>

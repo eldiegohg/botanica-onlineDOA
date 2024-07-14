@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Grid, Card, CardMedia, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { fetchSeeds, Seed } from '../services/apiService';
 import axios from 'axios';
+import { useCart } from '../context/CartContext';
 
 const UNSPLASH_API_URL = 'https://api.unsplash.com/search/photos';
 const UNSPLASH_ACCESS_KEY = 'X6_j0qdvnIfr365Duh2mXuetHs9s1vXNrP0v4g5KCU0';
@@ -12,6 +13,7 @@ interface SeedWithImage extends Seed {
 
 const SeedsView: React.FC = () => {
   const [seeds, setSeeds] = useState<SeedWithImage[]>([]);
+  const { addToCart } = useCart(); // Use the cart context
 
   useEffect(() => {
     fetchSeedsData();
@@ -44,6 +46,16 @@ const SeedsView: React.FC = () => {
     return undefined;
   };
 
+  const handleAddToCart = (seed: SeedWithImage) => {
+    addToCart({
+      id: seed.pkSeed,
+      name: seed.nombre,
+      price: seed.precio,
+      quantity: 1,
+      imageUrl: seed.imageUrl, // Add imageUrl to the cart item
+    });
+  };
+
   return (
     <Container className="seedsView-container">
       <Typography variant="h4" gutterBottom>Semillas Disponibles</Typography>
@@ -67,7 +79,7 @@ const SeedsView: React.FC = () => {
                 <Typography variant="body2" color="textSecondary"><strong>Precio:</strong> ${seed.precio}</Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" color="primary">Agregar al carrito</Button>
+                <Button size="small" color="primary" onClick={() => handleAddToCart(seed)}>Agregar al carrito</Button>
               </CardActions>
             </Card>
           </Grid>

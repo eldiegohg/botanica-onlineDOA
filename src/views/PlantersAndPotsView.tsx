@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Grid, Card, CardMedia, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { fetchPlanters, Planter } from '../services/apiService';
 import axios from 'axios';
+import { useCart } from '../context/CartContext';
 
 const UNSPLASH_API_URL = 'https://api.unsplash.com/search/photos';
 const UNSPLASH_ACCESS_KEY = 'X6_j0qdvnIfr365Duh2mXuetHs9s1vXNrP0v4g5KCU0';
@@ -12,6 +13,7 @@ interface PlanterWithImage extends Planter {
 
 const PlantersAndPotsView: React.FC = () => {
   const [planters, setPlanters] = useState<PlanterWithImage[]>([]);
+  const { addToCart } = useCart(); // Use the cart context
 
   const fetchPlantersData = useCallback(async () => {
     try {
@@ -45,6 +47,16 @@ const PlantersAndPotsView: React.FC = () => {
     return undefined;
   };
 
+  const handleAddToCart = (planter: PlanterWithImage) => {
+    addToCart({
+      id: planter.pkJardinera,
+      name: planter.nombre,
+      price: planter.precio,
+      quantity: 1,
+      imageUrl: planter.imageUrl, // Add imageUrl to the cart item
+    });
+  };
+
   return (
     <Container className="plantersView-container">
       <Typography variant="h4" gutterBottom>Jardineras y Macetas Disponibles</Typography>
@@ -70,7 +82,7 @@ const PlantersAndPotsView: React.FC = () => {
                   <Typography variant="body2" color="textSecondary"><strong>Precio:</strong> ${planter.precio}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">Agregar al carrito</Button>
+                  <Button size="small" color="primary" onClick={() => handleAddToCart(planter)}>Agregar al carrito</Button>
                 </CardActions>
               </Card>
             </Grid>

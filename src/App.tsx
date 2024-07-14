@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Header from './views/Header';
 import Home from './views/Home';
 import Footer from './views/Footer';
@@ -14,9 +15,12 @@ import FloralArrangementsView from './views/FloralArrangementsView';
 import PlantersAndPotsView from './views/PlantersAndPotsView';
 import GardeningToolsView from './views/GardeningToolsView';
 import AdminView from './views/AdminView';
+import { CartProvider } from './context/CartContext';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+
+const CLIENT_ID = "AayEy2OfE1XRJ_QI1YHEAkYbX9MJ8MuZaaCtFTEyYu7hgJ4wZ8Zf7dtzx49WI_H0J3s_tST-kbcYqGW-";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,26 +37,30 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="App">
-        <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginView handleLogin={handleLogin} />} />
-          <Route path="/register" element={<RegisterView />} />
-          <Route path="/reset-password" element={<ResetPasswordView />} />
-          <Route path="/plants" element={<PlantsView />} />
-          <Route path="/seeds" element={<SeedsView />} />
-          <Route path="/floral-arrangements" element={<FloralArrangementsView />} />
-          <Route path="/planters-and-pots" element={<PlantersAndPotsView />} />
-          <Route path="/gardening-tools" element={<GardeningToolsView />} />
-          <Route path="/profile" element={<ProfileView />} />
-          {isAdmin && <Route path="/admin" element={<AdminView />} />} {/* Conditional route for admin */}
-          <Route path="/cart" element={<CartView />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <PayPalScriptProvider options={{ clientId: CLIENT_ID }}>
+      <CartProvider>
+        <Router>
+          <div className="App">
+            <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<LoginView handleLogin={handleLogin} />} />
+              <Route path="/register" element={<RegisterView />} />
+              <Route path="/reset-password" element={<ResetPasswordView />} />
+              <Route path="/plants" element={<PlantsView />} />
+              <Route path="/seeds" element={<SeedsView />} />
+              <Route path="/floral-arrangements" element={<FloralArrangementsView />} />
+              <Route path="/planters-and-pots" element={<PlantersAndPotsView />} />
+              <Route path="/gardening-tools" element={<GardeningToolsView />} />
+              <Route path="/profile" element={<ProfileView />} />
+              {isAdmin && <Route path="/admin" element={<AdminView />} />} {/* Conditional route for admin */}
+              <Route path="/cart" element={<CartView />} />
+            </Routes>
+            <Footer />
+          </div>
+        </Router>
+      </CartProvider>
+    </PayPalScriptProvider>
   );
 }
 
