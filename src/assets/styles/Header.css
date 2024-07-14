@@ -1,0 +1,75 @@
+/* Header.css */
+.appBar {
+  background-color: #FFFFFF;
+  box-shadow: none;
+}
+
+.logo {
+  color: #58A218;
+  flex-grow: 1;
+  font-weight: bold;
+}
+
+.searchBox {
+  position: relative;
+  border-radius: 4px;
+  background-color: #E0E0E0;
+  margin-left: 16px;
+  width: 1000px; /* Ajusta el ancho según tus necesidades */
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  padding: 0 16px;
+  pointer-events: none;
+  color: #000000;
+}
+
+.inputRoot {
+  width: 100%;
+}
+
+.inputInput {
+  padding: 8px 8px 8px 0;
+  padding-left: calc(1em + 32px);
+  width: 100%;
+}
+
+.loginButton {
+  margin-left: 16px;
+  background-color: #8BC34A;
+  color: #FFFFFF;
+  border-radius: 20px;
+  text-transform: none;
+}
+
+.registerButton {
+  margin-left: 8px;
+  background-color: #4CAF50;
+  color: #FFFFFF;
+  border-radius: 20px;
+  text-transform: none;
+}
+
+.logoutButton,
+.profileButton,
+.cartButton {
+  margin-left: 8px;
+  background-color: #7CB342;
+  color: #FFFFFF;
+  border-radius: 20px;
+  text-transform: none;
+}
+
+.navBar {
+  background-color: #C5E1A5;
+  justify-content: center;
+}
+
+.navButton {
+  color: #000000;
+  text-transform: none;
+  font-weight: bold;
+  margin: 0 16px;
+}

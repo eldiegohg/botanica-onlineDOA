@@ -1,0 +1,24 @@
+/* ProfileView.css */
+.profileView-container {
+  margin-top: 2rem;
+}
+
+.profileView-title {
+  margin-bottom: 1rem;
+}
+
+.profileView-textField {
+  background-color: #ffff99; /* Amarillo claro */
+  border-radius: 20px;
+}
+
+.profileView-editButton {
+  background-color: #7cb342; /* Verde */
+  color: white;
+  height: 56px; /* Altura del TextField para alinear correctamente */
+  margin-top: 16px;
+}
+
+.profileView-editButton:hover {
+  background-color: #689f38; /* Verde oscuro */
+}

@@ -1,0 +1,19 @@
+/* NewsAndWeather.css */
+.newsWeather-container {
+  margin-top: 40px;
+}
+
+.section-title {
+  margin-bottom: 20px;
+}
+
+.news-card {
+  margin-bottom: 20px;
+}
+
+.weather-widget {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}

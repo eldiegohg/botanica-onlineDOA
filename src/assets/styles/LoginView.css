@@ -1,12 +1,25 @@
+/* LoginView.css */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+}
+
 .loginView-container {
   background: url('../img/inicioSesion.png') no-repeat center center;
-  background-size: cover;
+  background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
   height: 100vh;
+  width: 98.97vw; /* Asegura que ocupe todo el ancho de la pantalla */
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   z-index: 1;
+  overflow: hidden; /* Evita el desplazamiento horizontal */
 }
 
 .loginView-paper {

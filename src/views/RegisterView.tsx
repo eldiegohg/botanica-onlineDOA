@@ -1,24 +1,50 @@
 import React from 'react';
-import { Container, TextField, Button, Typography, Box, Grid, Paper } from '@mui/material';
+import { Container, TextField, Button, Typography, Box } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import '../assets/styles/RegisterView.css';
+import { register } from '../services/authService';
 
 const RegisterView: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const nombre = formData.get('nombre') as string;
+    const user = formData.get('user') as string;
+    const password = formData.get('password') as string;
+    const confirmPassword = formData.get('confirmPassword') as string;
+    const rol = formData.get('rol') as string;
+
+    if (password !== confirmPassword) {
+      alert('Las contraseñas no coinciden');
+      return;
+    }
+
+    try {
+      await register(nombre, user, password, rol);
+      navigate('/login');
+    } catch (error) {
+      alert('Error en el registro');
+    }
+  };
+
   return (
-    <Grid container component="main" className="registerView-root">
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className="registerView-paper">
-        <div className="registerView-content">
+    <div className="registerView-container">
+      <Container component="main" maxWidth="xs">
+        <div className="registerView-paper">
           <Typography component="h1" variant="h5">
-            Bienvenido
+            Registro
           </Typography>
-          <form className="registerView-form" noValidate>
+          <form className="registerView-form" noValidate onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="name"
+              id="nombre"
               label="Nombre completo"
-              name="name"
+              name="nombre"
               autoComplete="name"
               autoFocus
               className="registerView-textField"
@@ -28,21 +54,10 @@ const RegisterView: React.FC = () => {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Correo electrónico"
-              name="email"
-              autoComplete="email"
-              className="registerView-textField"
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="phone"
-              label="Teléfono"
-              name="phone"
-              autoComplete="phone"
+              id="user"
+              label="Usuario"
+              name="user"
+              autoComplete="username"
               className="registerView-textField"
             />
             <TextField
@@ -69,6 +84,17 @@ const RegisterView: React.FC = () => {
               autoComplete="current-password"
               className="registerView-textField"
             />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="rol"
+              label="Rol"
+              name="rol"
+              autoComplete="role"
+              className="registerView-textField"
+            />
             <Button
               type="submit"
               fullWidth
@@ -80,26 +106,26 @@ const RegisterView: React.FC = () => {
             </Button>
             <Box mt={2}>
               <Typography variant="body2" align="center">
-                ¿Tienes una cuenta? <a href="#">Inicia sesión aquí</a>
+                ¿Tienes una cuenta? <Link to="/login">Inicia sesión aquí</Link>
               </Typography>
             </Box>
           </form>
         </div>
-      </Grid>
-      <Grid item xs={false} sm={4} md={7} className="registerView-image">
+      </Container>
+      <div className="registerView-info">
         <Box className="registerView-infoBox">
           <Typography component="h1" variant="h4">
             En <strong>Botánica Online</strong>
           </Typography>
           <Typography component="h2" variant="h5">
-            descubre la mejor selección de plantas para tu hogar y oficina.
+            Descubre la mejor selección de plantas para tu hogar y oficina.
           </Typography>
           <Typography component="h3" variant="subtitle1">
             Plantas que inspiran, entregas que emocionan.
           </Typography>
         </Box>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };
 
