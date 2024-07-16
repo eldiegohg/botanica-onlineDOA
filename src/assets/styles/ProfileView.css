@@ -1,14 +1,13 @@
-/* ProfileView.css */
 .profileView-container {
   margin-top: 2rem;
 }
 
 .profileView-title {
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .profileView-textField {
-  background-color: #ffff99; /* Amarillo claro */
   border-radius: 20px;
 }
 

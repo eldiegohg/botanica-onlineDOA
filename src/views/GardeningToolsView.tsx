@@ -3,6 +3,7 @@ import { Container, Grid, Card, CardMedia, CardContent, CardActions, Button, Typ
 import { fetchTools, Tool } from '../services/apiService';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
+import '../assets/styles/GardeningToolsView.css'; // Asegúrate de importar el CSS
 
 const UNSPLASH_API_URL = 'https://api.unsplash.com/search/photos';
 const UNSPLASH_ACCESS_KEY = 'X6_j0qdvnIfr365Duh2mXuetHs9s1vXNrP0v4g5KCU0';
@@ -57,12 +58,12 @@ const GardeningToolsView: React.FC = () => {
   };
 
   return (
-    <Container className="toolsView-container">
+    <Container className="gardeningToolsView-container">
       <Typography variant="h4" gutterBottom>Herramientas de Jardinería Disponibles</Typography>
       <Grid container spacing={4}>
         {tools.map((tool) => (
           <Grid item xs={12} sm={6} md={3} key={tool.pkHerramienta}>
-            <Card className="toolsView-card">
+            <Card className="gardeningToolsView-card">
               {tool.imageUrl && (
                 <CardMedia
                   component="img"
@@ -80,7 +81,13 @@ const GardeningToolsView: React.FC = () => {
                 <Typography variant="body2" color="textSecondary"><strong>Precio:</strong> ${tool.precio}</Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" color="primary" onClick={() => handleAddToCart(tool)}>Agregar al carrito</Button>
+                <Button
+                  size="small"
+                  className="gardeningToolsView-addToCartButton"
+                  onClick={() => handleAddToCart(tool)}
+                >
+                  Agregar al carrito
+                </Button>
               </CardActions>
             </Card>
           </Grid>

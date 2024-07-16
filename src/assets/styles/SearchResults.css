@@ -1,0 +1,35 @@
+.searchResults-container {
+  margin-top: 60px; /* Ajusta según el tamaño del header */
+  margin-bottom: 60px; /* Ajusta según el tamaño del footer */
+}
+
+.searchResults-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.searchResults-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.searchResults-card {
+  transition: transform 0.2s;
+  margin: 10px;
+}
+
+.searchResults-card:hover {
+  transform: scale(1.05);
+}
+
+.searchResults-button {
+  background-color: #8bc34a;
+  color: #ffffff;
+  text-transform: none;
+  margin-top: 10px;
+}
+
+.searchResults-button:hover {
+  background-color: #7cb342;
+}

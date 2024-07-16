@@ -3,6 +3,7 @@ import { Container, Grid, Card, CardMedia, CardContent, CardActions, Button, Typ
 import { fetchFloralArrangements, FloralArrangement } from '../services/apiService';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
+import '../assets/styles/FloralArrangementsView.css'; // Asegúrate de importar el CSS
 
 const UNSPLASH_API_URL = 'https://api.unsplash.com/search/photos';
 const UNSPLASH_ACCESS_KEY = 'X6_j0qdvnIfr365Duh2mXuetHs9s1vXNrP0v4g5KCU0';
@@ -79,7 +80,13 @@ const FloralArrangementsView: React.FC = () => {
                 <Typography variant="body2" color="textSecondary"><strong>Precio:</strong> ${floral.precio}</Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" color="primary" onClick={() => handleAddToCart(floral)}>Agregar al carrito</Button>
+                <Button
+                  size="small"
+                  className="floralArrangementsView-addToCartButton"
+                  onClick={() => handleAddToCart(floral)}
+                >
+                  Agregar al carrito
+                </Button>
               </CardActions>
             </Card>
           </Grid>

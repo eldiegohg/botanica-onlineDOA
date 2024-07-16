@@ -1,8 +1,8 @@
-// src/views/CartView.tsx
 import React from 'react';
 import { Container, Grid, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 import { useCart } from '../context/CartContext';
 import { PayPalButtons, PayPalButtonsComponentProps } from "@paypal/react-paypal-js";
+import '../assets/styles/cartStyles.css'; 
 
 const CartView: React.FC = () => {
   const { cart, removeFromCart, decreaseQuantity, clearCart, increaseQuantity } = useCart();
@@ -53,9 +53,29 @@ const CartView: React.FC = () => {
                 <Typography variant="h6">{item.name}</Typography>
                 <Typography variant="body2" color="textSecondary"><strong>Precio:</strong> ${item.price}</Typography>
                 <Typography variant="body2" color="textSecondary"><strong>Cantidad:</strong> {item.quantity}</Typography>
-                <Button variant="contained" color="primary" onClick={() => decreaseQuantity(item.id)}>Disminuir Cantidad</Button>
-                <Button variant="contained" color="primary" onClick={() => increaseQuantity(item.id)}>Aumentar Cantidad</Button>
-                <Button variant="contained" color="secondary" onClick={() => removeFromCart(item.id)}>Eliminar</Button>
+                <div className="button-container">
+                  <Button 
+                    variant="contained" 
+                    className="decrease-button" 
+                    onClick={() => decreaseQuantity(item.id)}
+                  >
+                    Disminuir Cantidad
+                  </Button>
+                  <Button 
+                    variant="contained" 
+                    className="increase-button" 
+                    onClick={() => increaseQuantity(item.id)}
+                  >
+                    Aumentar Cantidad
+                  </Button>
+                  <Button 
+                    variant="contained" 
+                    className="remove-button" 
+                    onClick={() => removeFromCart(item.id)}
+                  >
+                    Eliminar
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </Grid>

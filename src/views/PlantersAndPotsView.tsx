@@ -3,6 +3,7 @@ import { Container, Grid, Card, CardMedia, CardContent, CardActions, Button, Typ
 import { fetchPlanters, Planter } from '../services/apiService';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
+import '../assets/styles/PlantersAndPotsView.css'; // Asegúrate de importar el CSS
 
 const UNSPLASH_API_URL = 'https://api.unsplash.com/search/photos';
 const UNSPLASH_ACCESS_KEY = 'X6_j0qdvnIfr365Duh2mXuetHs9s1vXNrP0v4g5KCU0';
@@ -58,13 +59,13 @@ const PlantersAndPotsView: React.FC = () => {
   };
 
   return (
-    <Container className="plantersView-container">
+    <Container className="plantersAndPotsView-container">
       <Typography variant="h4" gutterBottom>Jardineras y Macetas Disponibles</Typography>
       <Grid container spacing={4}>
         {planters.length > 0 ? (
           planters.map((planter) => (
             <Grid item xs={12} sm={6} md={3} key={planter.pkJardinera}>
-              <Card className="plantersView-card">
+              <Card className="plantersAndPotsView-card">
                 {planter.imageUrl && (
                   <CardMedia
                     component="img"
@@ -82,7 +83,13 @@ const PlantersAndPotsView: React.FC = () => {
                   <Typography variant="body2" color="textSecondary"><strong>Precio:</strong> ${planter.precio}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary" onClick={() => handleAddToCart(planter)}>Agregar al carrito</Button>
+                  <Button
+                    size="small"
+                    className="plantersAndPotsView-addToCartButton"
+                    onClick={() => handleAddToCart(planter)}
+                  >
+                    Agregar al carrito
+                  </Button>
                 </CardActions>
               </Card>
             </Grid>

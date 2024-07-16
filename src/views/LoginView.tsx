@@ -43,7 +43,7 @@ const LoginView: FC<LoginViewProps> = ({ handleLogin }) => {
   };
 
   return (
-    <GoogleOAuthProvider clientId="1092123106626-f26ftprbk6gc5co3ksauqejft4gjvcan.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="1092123106626-ef01rab048vf7rm8tnd1p3aruoeun3v7.apps.googleusercontent.com">
       <div className="loginView-container">
         <Container component="main" maxWidth="xs">
           <div className="loginView-paper">

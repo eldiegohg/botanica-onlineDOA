@@ -1,7 +1,9 @@
+// src/views/Home.tsx
 import React from 'react';
 import Slider from 'react-slick';
 import { Typography, Box, Container, Grid, Card, CardMedia, CardContent, Link } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import { Link as RouterLink } from 'react-router-dom';
 import '../assets/styles/Home.css';
 import NewsAndWeather from './NewsAndWeather';
 
@@ -44,6 +46,7 @@ const sections = [
       { title: 'Plantas de jardín', image: plantasDeJardin },
       { title: 'Plantas de huerto', image: plantasDeHuerto },
     ],
+    link: '/plants'
   },
   {
     title: 'Semillas',
@@ -53,6 +56,7 @@ const sections = [
       { title: 'Semillas de flores', image: semillasFlores },
       { title: 'Semillas de árboles frutales', image: semillasArbolesFrutales },
     ],
+    link: '/seeds'
   },
   {
     title: 'Jardineras y Macetas',
@@ -62,6 +66,7 @@ const sections = [
       { title: 'Macetas especiales', image: macetasEspeciales },
       { title: 'Materiales especificos', image: materialesEspecificos },
     ],
+    link: '/planters-and-pots'
   },
   {
     title: 'Arreglos Florales',
@@ -71,6 +76,7 @@ const sections = [
       { title: 'Cestas y cajas de flores', image: cestasCajasFlores },
       { title: 'Flores preservadas y secas', image: floresPreservadasSecas },
     ],
+    link: '/floral-arrangements'
   },
   {
     title: 'Herramientas de Jardinería',
@@ -80,6 +86,7 @@ const sections = [
       { title: 'Herramientas de riego', image: herramientasRiego },
       { title: 'Herramientas de cultivo', image: herramientasCultivo },
     ],
+    link: '/gardening-tools'
   },
 ];
 
@@ -132,8 +139,10 @@ const Home: React.FC = () => {
           <Box key={section.title} className="homeSections-section">
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
               <Typography variant="h4">{section.title}</Typography>
-              <Link href="#" variant="body2" color="textPrimary">
-                Ver todo
+              <Link component={RouterLink} to={section.link} className="viewAll-link">
+                <Box className="viewAll-button">
+                  Ver todo
+                </Box>
               </Link>
             </Box>
             <Grid container spacing={2}>

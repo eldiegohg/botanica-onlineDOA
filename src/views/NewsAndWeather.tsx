@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Grid, Typography, Card, CardContent, CardMedia, Box } from '@mui/material';
+import axios from 'axios';
 import '../assets/styles/NewsAndWeather.css';
+
+const UNSPLASH_API_URL = 'https://api.unsplash.com/search/photos';
+const UNSPLASH_ACCESS_KEY = 'X6_j0qdvnIfr365Duh2mXuetHs9s1vXNrP0v4g5KCU0';
 
 interface Article {
   title: string;
@@ -16,22 +20,28 @@ const NewsAndWeather: React.FC = () => {
     // Simulated Fetch news data
     const simulatedNews = [
       {
-        title: 'Beneficios de las Plantas en el Hogar',
+        title: 'Beneficios de las plantas en el hogar',
         description: 'Las plantas no solo embellecen tu hogar, sino que también mejoran la calidad del aire y reducen el estrés.',
-        urlToImage: 'https://example.com/imagen1.jpg'
       },
       {
-        title: 'Cómo Cuidar tus Plantas de Interior',
+        title: 'Cómo cuidar tus plantas de interior',
         description: 'Aprende los mejores trucos para mantener tus plantas de interior saludables y vibrantes durante todo el año.',
-        urlToImage: 'https://example.com/imagen2.jpg'
       },
       {
-        title: 'Plantas Medicinales que Puedes Cultivar en Casa',
+        title: 'Plantas medicinales que puedes cultivar en casa',
         description: 'Descubre qué plantas medicinales puedes cultivar en tu hogar y cómo pueden mejorar tu salud.',
-        urlToImage: 'https://example.com/imagen3.jpg'
       }
     ];
-    setNews(simulatedNews);
+
+    const fetchImages = async () => {
+      const newsWithImages = await Promise.all(simulatedNews.map(async (article) => {
+        const imageUrl = await fetchImageFromUnsplash(article.title);
+        return { ...article, urlToImage: imageUrl };
+      }));
+      setNews(newsWithImages);
+    };
+
+    fetchImages();
 
     // Fetch weather data
     fetch('https://api.open-meteo.com/v1/forecast?latitude=21.1619&longitude=-86.8515&hourly=temperature_2m')
@@ -45,6 +55,20 @@ const NewsAndWeather: React.FC = () => {
       })
       .catch(error => console.error('Error fetching weather data:', error));
   }, []);
+
+  const fetchImageFromUnsplash = async (query: string): Promise<string | undefined> => {
+    try {
+      const response = await axios.get(UNSPLASH_API_URL, {
+        params: { query, client_id: UNSPLASH_ACCESS_KEY, per_page: 1 },
+      });
+      if (response.data.results && response.data.results.length > 0) {
+        return response.data.results[0].urls.small;
+      }
+    } catch (error) {
+      console.error('Error fetching image from Unsplash', error);
+    }
+    return undefined;
+  };
 
   return (
     <Container className="newsWeather-container">

@@ -13,12 +13,9 @@ html, body {
   background: url('../img/registro.png') no-repeat center center;
   background-size: cover;
   height: 100vh;
-  width: 100vw;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  position: relative;
-  z-index: 1;
+  justify-content: center;
   overflow: hidden;
 }
 
@@ -30,7 +27,7 @@ html, body {
 }
 
 .registerView-form {
-  width: 100%; /* Fix IE 11 issue. */
+  width: 100%;
   margin-top: 8px;
 }
 
@@ -69,4 +66,11 @@ html, body {
   border-radius: 10px;
   text-align: center;
   max-width: 80%;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 600px) {
+  .registerView-info {
+    display: none;
+  }
 }

@@ -1,13 +1,12 @@
-/* Header.css */
+/* Estilos generales */
 .appBar {
   background-color: #FFFFFF;
   box-shadow: none;
 }
 
 .logo {
-  color: #58A218;
-  flex-grow: 1;
-  font-weight: bold;
+  height: 50px; /* Tamaño del logo en pantallas grandes */
+  transition: height 0.3s; /* Transición suave para el cambio de tamaño */
 }
 
 .searchBox {
@@ -15,7 +14,6 @@
   border-radius: 4px;
   background-color: #E0E0E0;
   margin-left: 16px;
-  width: 1000px; /* Ajusta el ancho según tus necesidades */
   display: flex;
   align-items: center;
 }
@@ -37,7 +35,6 @@
 }
 
 .loginButton {
-  margin-left: 16px;
   background-color: #8BC34A;
   color: #FFFFFF;
   border-radius: 20px;
@@ -45,21 +42,28 @@
 }
 
 .registerButton {
-  margin-left: 8px;
-  background-color: #4CAF50;
+  margin-top: 8px;
+  background-color: #8BC34A;
   color: #FFFFFF;
   border-radius: 20px;
   text-transform: none;
 }
 
 .logoutButton,
-.profileButton,
-.cartButton {
-  margin-left: 8px;
-  background-color: #7CB342;
+.profileButton {
+  background-color: #8BC34A;
   color: #FFFFFF;
   border-radius: 20px;
   text-transform: none;
+  margin-top: 8px;
+}
+
+.cartButton {
+  background-color: transparent;
+  color: #000000;
+  border-radius: 20px;
+  text-transform: none;
+  margin-left: 8px;
 }
 
 .navBar {
@@ -72,4 +76,80 @@
   text-transform: none;
   font-weight: bold;
   margin: 0 16px;
+  transition: color 0.3s;
+  text-decoration: none; /* Para quitar el subrayado de los enlaces */
+}
+
+.navButton:hover {
+  color: #DDDDDD; /* Color al pasar el mouse por encima */
+}
+
+.navButton:active {
+  color: #BBBBBB; /* Color al hacer clic */
+}
+
+.drawer {
+  background-color: #8BC34A; /* El mismo color que el botón de inicio de sesión */
+  width: 250px;
+}
+
+.drawer .MuiListItem-root {
+  color: #FFFFFF;
+}
+
+.drawer .MuiListItem-root:hover {
+  background-color: #7CB342; /* Color de fondo al pasar el mouse por encima */
+}
+
+.userIcon {
+  color: #8BC34A;
+  font-size: 2rem; /* Tamaño del icono en pantallas grandes */
+  transition: color 0.3s, font-size 0.3s;
+}
+
+.cartIcon {
+  color: #8BC34A;
+  font-size: 2rem; /* Tamaño del icono en pantallas grandes */
+  transition: color 0.3s, font-size 0.3s;
+}
+
+/* Estilos específicos para los iconos del menú y buscador */
+.menuIcon {
+  color: #8BC34A;
+  font-size: 2rem; /* Tamaño del icono en pantallas grandes */
+  transition: color 0.3s, font-size 0.3s;
+}
+
+.searchToggleIcon {
+  color: #8BC34A;
+  font-size: 2rem; /* Tamaño del icono en pantallas grandes */
+  transition: color 0.3s, font-size 0.3s;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 960px) {
+  .logo {
+    height: 20px; /* Reducir tamaño del logo al 40% */
+  }
+
+  .searchBox {
+    display: none; /* Ocultar la barra de búsqueda en pantallas pequeñas */
+  }
+
+  .loginButton, .registerButton, .logoutButton, .profileButton, .cartButton {
+    font-size: 0.8em; /* Reducir tamaño de fuente de los botones */
+    padding: 4px 8px; /* Ajustar el padding de los botones */
+  }
+
+  .navButton {
+    font-size: 0.9em; /* Reducir tamaño de fuente de los botones de navegación */
+  }
+
+  .userIcon,
+  .cartIcon,
+  .menuIcon,
+  .searchToggleIcon {
+    color: #8BC34A; /* Mantener el color verde para los iconos */
+    font-size: 1.5rem; /* Reducir tamaño del icono en pantallas pequeñas */
+  }
 }

@@ -1,6 +1,7 @@
 /* FloralArrangementsView.css */
 .floralArrangementsView-container {
   margin-top: 20px;
+  padding: 20px;
 }
 
 .floralArrangementsView-category {
@@ -9,6 +10,8 @@
 
 .floralArrangementsView-card {
   transition: transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para las tarjetas */
+  border-radius: 8px; /* Esquinas redondeadas */
 }
 
 .floralArrangementsView-card:hover {
@@ -38,4 +41,17 @@
 
 .floralArrangementsView-modal button {
   width: 100%;
+}
+
+.floralArrangementsView-addToCartButton {
+  background-color: #8BC34A;
+  color: #FFFFFF;
+  border-radius: 20px;
+  text-transform: none;
+  transition: background-color 0.3s;
+  padding: 10px 20px; /* Tamaño del botón */
+}
+
+.floralArrangementsView-addToCartButton:hover {
+  background-color: #7CB342;
 }

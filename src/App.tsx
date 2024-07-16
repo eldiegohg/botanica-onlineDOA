@@ -15,6 +15,7 @@ import FloralArrangementsView from './views/FloralArrangementsView';
 import PlantersAndPotsView from './views/PlantersAndPotsView';
 import GardeningToolsView from './views/GardeningToolsView';
 import AdminView from './views/AdminView';
+import SearchResults from './views/SearchResults'; // Importar el componente de resultados de búsqueda
 import { CartProvider } from './context/CartContext';
 
 import 'slick-carousel/slick/slick.css';
@@ -55,6 +56,7 @@ function App() {
               <Route path="/profile" element={<ProfileView />} />
               {isAdmin && <Route path="/admin" element={<AdminView />} />} {/* Conditional route for admin */}
               <Route path="/cart" element={<CartView />} />
+              <Route path="/search" element={<SearchResults />} /> {/* Agregar ruta de búsqueda */}
             </Routes>
             <Footer />
           </div>
