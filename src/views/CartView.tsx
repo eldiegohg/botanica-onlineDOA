@@ -11,7 +11,7 @@ const CartView: React.FC = () => {
   const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
 
   const createOrder: PayPalButtonsComponentProps['createOrder'] = (data, actions) => {
-    if (!actions.order) return Promise.reject();
+    if (!actions.order) return Promise.reject('Error creating order');
     return actions.order.create({
       purchase_units: [{
         amount: {
@@ -20,6 +20,12 @@ const CartView: React.FC = () => {
         },
       }],
       intent: 'CAPTURE'
+    }).then((orderId) => {
+      if (orderId) return orderId;
+      return Promise.reject('No order ID returned');
+    }).catch((error) => {
+      console.error('Error creating order:', error);
+      return Promise.reject(error);
     });
   };
 
@@ -29,6 +35,8 @@ const CartView: React.FC = () => {
       const payerName = details.payer?.name?.given_name;
       alert(`Transaction completed by ${payerName}`);
       clearCart();
+    }).catch((error) => {
+      console.error('Error capturing order:', error);
     });
   };
 
@@ -85,6 +93,7 @@ const CartView: React.FC = () => {
         <PayPalButtons 
           createOrder={createOrder} 
           onApprove={onApprove} 
+          onError={(err) => console.error('PayPal Button Error:', err)}
         />
       </div>
     </Container>

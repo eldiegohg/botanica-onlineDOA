@@ -14,7 +14,7 @@ const RegisterView: React.FC = () => {
     const user = formData.get('user') as string;
     const password = formData.get('password') as string;
     const confirmPassword = formData.get('confirmPassword') as string;
-    const rol = '1'; // Asignar rol 1 automáticamente como cadena de texto
+    const rol = '1'; 
 
     if (password !== confirmPassword) {
       alert('Las contraseñas no coinciden');

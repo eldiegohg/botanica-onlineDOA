@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { AppBar, Toolbar, IconButton, InputBase, Button, Box, Drawer, List, ListItem, ListItemText, Grid, Popover, Dialog, DialogContent, DialogActions } from '@mui/material';
 import { Menu as MenuIcon, Search as SearchIcon, AccountCircle as AccountCircleIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material';
-import { Link, useNavigate } from 'react-router-dom'; // Importar useNavigate para la redirección
+import { Link, useNavigate } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import '../assets/styles/Header.css';
 import logo from '../assets/img/Logo.jpeg';
@@ -98,7 +98,7 @@ const Header: FC<HeaderProps> = ({ isLoggedIn, handleLogout }) => {
                 <InputBase
                   placeholder="Buscar…"
                   value={searchQuery}
-                  onChange={handleSearchChange} // Manejar cambios
+                  onChange={handleSearchChange}
                   classes={{ root: 'inputRoot', input: 'inputInput' }}
                   inputProps={{ 'aria-label': 'search' }}
                 />
