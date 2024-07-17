@@ -82,3 +82,42 @@
 .viewAll-button:hover {
   background-color: #218838;
 }
+
+
+/* Responsive adjustments */
+@media (max-width: 960px) {
+  .slider-item {
+    height: 200px; /* Ajustar la altura para dispositivos más pequeños */
+  }
+
+  .slider-title {
+    font-size: 1.5rem;
+  }
+
+  .slider-subtitle {
+    font-size: 1rem;
+  }
+
+  .slider-note {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .slider-item {
+    height: 150px; /* Ajustar la altura para dispositivos más pequeños */
+  }
+
+  .slider-title {
+    font-size: 1.2rem;
+  }
+
+  .slider-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .slider-note {
+    font-size: 0.7rem;
+  }
+}
+

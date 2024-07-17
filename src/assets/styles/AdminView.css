@@ -1,0 +1,25 @@
+/* AdminView.css */
+.addButton {
+  background-color: #4caf50; /* Verde */
+  color: white;
+}
+
+.deleteButton {
+  background-color: #f44336; /* Rojo */
+  color: white;
+}
+
+.editButton {
+  background-color: #ffeb3b; /* Amarillo */
+  color: black;
+}
+
+.updateButton {
+  background-color: #4caf50; /* Verde */
+  color: white;
+}
+
+.cancelButton {
+  background-color: #f44336; /* Rojo */
+  color: white;
+}

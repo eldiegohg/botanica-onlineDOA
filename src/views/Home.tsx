@@ -109,10 +109,10 @@ const Home: React.FC = () => {
         <div className="slider-item">
           <Box className="slider-content">
             <Typography variant="h3" className="slider-title">
-              ¡Envío gratis!
+              ¡Envío gratis! a toda la República
             </Typography>
             <Typography variant="h6" className="slider-subtitle">
-              En pedidos superiores a $50.00*
+              En pedidos superiores a $500.00 pesos*
             </Typography>
             <Typography variant="body2" className="slider-note">
               * Válido todo el mes de Junio de 2024

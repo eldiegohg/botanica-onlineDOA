@@ -7,6 +7,7 @@ import {
   fetchPlanters, addPlanter, updatePlanter, deletePlanter, Planter,
   fetchTools, addTool, updateTool, deleteTool, Tool
 } from '../services/apiService';
+import '../assets/styles/AdminView.css';
 
 const AdminView: React.FC = () => {
   const [plants, setPlants] = useState<Plant[]>([]);
@@ -291,7 +292,7 @@ const AdminView: React.FC = () => {
         <TextField name="categoria" label="Categoria" onChange={handleChange} />
         <TextField name="descripcion" label="Descripcion" onChange={handleChange} />
         <TextField name="precio" label="Precio" type="number" onChange={handleChange} />
-        <Button variant="contained" color="primary" onClick={handleAddPlant}>Add Plant</Button>
+        <Button variant="contained" style={{ backgroundColor: 'green', color: 'white' }} onClick={handleAddPlant}>Add Plant</Button>
       </Box>
       <Box mt={4}>
         <Typography variant="h6">Plants List</Typography>
@@ -299,8 +300,8 @@ const AdminView: React.FC = () => {
           {plants.map((plant) => (
             <Grid item key={plant.pkPlanta}>
               <Typography>{plant.nombre}</Typography>
-              <Button variant="contained" color="secondary" onClick={() => handleDeletePlant(plant.pkPlanta)}>Delete</Button>
-              <Button variant="contained" color="primary" onClick={() => setEditPlant(plant)}>Edit</Button>
+              <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => handleDeletePlant(plant.pkPlanta)}>Delete</Button>
+              <Button variant="contained" style={{ backgroundColor: 'yellow', color: 'black' }} onClick={() => setEditPlant(plant)}>Edit</Button>
             </Grid>
           ))}
         </Grid>
@@ -313,8 +314,8 @@ const AdminView: React.FC = () => {
           <TextField name="categoria" label="Categoria" value={editPlant.categoria} onChange={handleEditChange} />
           <TextField name="descripcion" label="Descripcion" value={editPlant.descripcion} onChange={handleEditChange} />
           <TextField name="precio" label="Precio" type="number" value={editPlant.precio} onChange={handleEditChange} />
-          <Button variant="contained" color="primary" onClick={handleUpdatePlant}>Update Plant</Button>
-          <Button variant="contained" onClick={() => setEditPlant(null)}>Cancel</Button>
+          <Button variant="contained" style={{ backgroundColor: 'green', color: 'white' }} onClick={handleUpdatePlant}>Update Plant</Button>
+          <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => setEditPlant(null)}>Cancel</Button>
         </Box>
       )}
 
@@ -326,7 +327,7 @@ const AdminView: React.FC = () => {
         <TextField name="categoria" label="Categoria" onChange={handleSeedChange} />
         <TextField name="descripcion" label="Descripcion" onChange={handleSeedChange} />
         <TextField name="precio" label="Precio" type="number" onChange={handleSeedChange} />
-        <Button variant="contained" color="primary" onClick={handleAddSeed}>Add Seed</Button>
+        <Button variant="contained" style={{ backgroundColor: 'green', color: 'white' }} onClick={handleAddSeed}>Add Seed</Button>
       </Box>
       <Box mt={4}>
         <Typography variant="h6">Seeds List</Typography>
@@ -334,8 +335,8 @@ const AdminView: React.FC = () => {
           {seeds.map((seed) => (
             <Grid item key={seed.pkSeed}>
               <Typography>{seed.nombre}</Typography>
-              <Button variant="contained" color="secondary" onClick={() => handleDeleteSeed(seed.pkSeed)}>Delete</Button>
-              <Button variant="contained" color="primary" onClick={() => setEditSeed(seed)}>Edit</Button>
+              <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => handleDeleteSeed(seed.pkSeed)}>Delete</Button>
+              <Button variant="contained" style={{ backgroundColor: 'yellow', color: 'black' }} onClick={() => setEditSeed(seed)}>Edit</Button>
             </Grid>
           ))}
         </Grid>
@@ -348,8 +349,8 @@ const AdminView: React.FC = () => {
           <TextField name="categoria" label="Categoria" value={editSeed.categoria} onChange={handleEditSeedChange} />
           <TextField name="descripcion" label="Descripcion" value={editSeed.descripcion} onChange={handleEditSeedChange} />
           <TextField name="precio" label="Precio" type="number" value={editSeed.precio} onChange={handleEditSeedChange} />
-          <Button variant="contained" color="primary" onClick={handleUpdateSeed}>Update Seed</Button>
-          <Button variant="contained" onClick={() => setEditSeed(null)}>Cancel</Button>
+          <Button variant="contained" style={{ backgroundColor: 'green', color: 'white' }} onClick={handleUpdateSeed}>Update Seed</Button>
+          <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => setEditSeed(null)}>Cancel</Button>
         </Box>
       )}
 
@@ -361,7 +362,7 @@ const AdminView: React.FC = () => {
         <TextField name="flores" label="Flores" onChange={handleFloralArrangementChange} />
         <TextField name="descripcion" label="Descripcion" onChange={handleFloralArrangementChange} />
         <TextField name="precio" label="Precio" type="number" onChange={handleFloralArrangementChange} />
-        <Button variant="contained" color="primary" onClick={handleAddFloralArrangement}>Add Floral Arrangement</Button>
+        <Button variant="contained" style={{ backgroundColor: 'green', color: 'white' }} onClick={handleAddFloralArrangement}>Add Floral Arrangement</Button>
       </Box>
       <Box mt={4}>
         <Typography variant="h6">Floral Arrangements List</Typography>
@@ -369,8 +370,8 @@ const AdminView: React.FC = () => {
           {floralArrangements.map((floral) => (
             <Grid item key={floral.pkArreglo}>
               <Typography>{floral.nombre}</Typography>
-              <Button variant="contained" color="secondary" onClick={() => handleDeleteFloralArrangement(floral.pkArreglo)}>Delete</Button>
-              <Button variant="contained" color="primary" onClick={() => setEditFloralArrangement(floral)}>Edit</Button>
+              <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => handleDeleteFloralArrangement(floral.pkArreglo)}>Delete</Button>
+              <Button variant="contained" style={{ backgroundColor: 'yellow', color: 'black' }} onClick={() => setEditFloralArrangement(floral)}>Edit</Button>
             </Grid>
           ))}
         </Grid>
@@ -383,8 +384,8 @@ const AdminView: React.FC = () => {
           <TextField name="flores" label="Flores" value={editFloralArrangement.flores} onChange={handleEditFloralArrangementChange} />
           <TextField name="descripcion" label="Descripcion" value={editFloralArrangement.descripcion} onChange={handleEditFloralArrangementChange} />
           <TextField name="precio" label="Precio" type="number" value={editFloralArrangement.precio} onChange={handleEditFloralArrangementChange} />
-          <Button variant="contained" color="primary" onClick={handleUpdateFloralArrangement}>Update Floral Arrangement</Button>
-          <Button variant="contained" onClick={() => setEditFloralArrangement(null)}>Cancel</Button>
+          <Button variant="contained" style={{ backgroundColor: 'green', color: 'white' }} onClick={handleUpdateFloralArrangement}>Update Floral Arrangement</Button>
+          <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => setEditFloralArrangement(null)}>Cancel</Button>
         </Box>
       )}
 
@@ -397,7 +398,7 @@ const AdminView: React.FC = () => {
         <TextField name="material" label="Material" onChange={handlePlanterChange} />
         <TextField name="descripcion" label="Descripcion" onChange={handlePlanterChange} />
         <TextField name="precio" label="Precio" type="number" onChange={handlePlanterChange} />
-        <Button variant="contained" color="primary" onClick={handleAddPlanter}>Add Planter</Button>
+        <Button variant="contained" style={{ backgroundColor: 'green', color: 'white' }} onClick={handleAddPlanter}>Add Planter</Button>
       </Box>
       <Box mt={4}>
         <Typography variant="h6">Planters List</Typography>
@@ -405,8 +406,8 @@ const AdminView: React.FC = () => {
           {planters.map((planter) => (
             <Grid item key={planter.pkJardinera}>
               <Typography>{planter.nombre}</Typography>
-              <Button variant="contained" color="secondary" onClick={() => handleDeletePlanter(planter.pkJardinera)}>Delete</Button>
-              <Button variant="contained" color="primary" onClick={() => setEditPlanter(planter)}>Edit</Button>
+              <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => handleDeletePlanter(planter.pkJardinera)}>Delete</Button>
+              <Button variant="contained" style={{ backgroundColor: 'yellow', color: 'black' }} onClick={() => setEditPlanter(planter)}>Edit</Button>
             </Grid>
           ))}
         </Grid>
@@ -420,8 +421,8 @@ const AdminView: React.FC = () => {
           <TextField name="material" label="Material" value={editPlanter.material} onChange={handleEditPlanterChange} />
           <TextField name="descripcion" label="Descripcion" value={editPlanter.descripcion} onChange={handleEditPlanterChange} />
           <TextField name="precio" label="Precio" type="number" value={editPlanter.precio} onChange={handleEditPlanterChange} />
-          <Button variant="contained" color="primary" onClick={handleUpdatePlanter}>Update Planter</Button>
-          <Button variant="contained" onClick={() => setEditPlanter(null)}>Cancel</Button>
+          <Button variant="contained" style={{ backgroundColor: 'green', color: 'white' }} onClick={handleUpdatePlanter}>Update Planter</Button>
+          <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => setEditPlanter(null)}>Cancel</Button>
         </Box>
       )}
 
@@ -434,7 +435,7 @@ const AdminView: React.FC = () => {
         <TextField name="material" label="Material" onChange={handleToolChange} />
         <TextField name="descripcion" label="Descripcion" onChange={handleToolChange} />
         <TextField name="precio" label="Precio" type="number" onChange={handleToolChange} />
-        <Button variant="contained" color="primary" onClick={handleAddTool}>Add Tool</Button>
+        <Button variant="contained" style={{ backgroundColor: 'green', color: 'white' }} onClick={handleAddTool}>Add Tool</Button>
       </Box>
       <Box mt={4}>
         <Typography variant="h6">Tools List</Typography>
@@ -442,8 +443,8 @@ const AdminView: React.FC = () => {
           {tools.map((tool) => (
             <Grid item key={tool.pkHerramienta}>
               <Typography>{tool.nombre}</Typography>
-              <Button variant="contained" color="secondary" onClick={() => handleDeleteTool(tool.pkHerramienta)}>Delete</Button>
-              <Button variant="contained" color="primary" onClick={() => setEditTool(tool)}>Edit</Button>
+              <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => handleDeleteTool(tool.pkHerramienta)}>Delete</Button>
+              <Button variant="contained" style={{ backgroundColor: 'yellow', color: 'black' }} onClick={() => setEditTool(tool)}>Edit</Button>
             </Grid>
           ))}
         </Grid>
@@ -457,8 +458,8 @@ const AdminView: React.FC = () => {
           <TextField name="material" label="Material" value={editTool.material} onChange={handleEditToolChange} />
           <TextField name="descripcion" label="Descripcion" value={editTool.descripcion} onChange={handleEditToolChange} />
           <TextField name="precio" label="Precio" type="number" value={editTool.precio} onChange={handleEditToolChange} />
-          <Button variant="contained" color="primary" onClick={handleUpdateTool}>Update Tool</Button>
-          <Button variant="contained" onClick={() => setEditTool(null)}>Cancel</Button>
+          <Button variant="contained" style={{ backgroundColor: 'green', color: 'white' }} onClick={handleUpdateTool}>Update Tool</Button>
+          <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => setEditTool(null)}>Cancel</Button>
         </Box>
       )}
     </Container>
